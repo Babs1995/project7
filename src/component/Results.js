@@ -4,29 +4,31 @@ import NotFound from './NotFound';
 // import Nav from './Nav';
 // import SearchForm from './SearchForm';
 
-//photo containter that maps over array if a photo is found return the key and results otherwise return not found component
-const Results = props => { 
-  const results = props.data;
-  let photos;
+//photo container that maps over array if a photo is found return the key and results otherwise return not found component
+const Results = (props) => {
+    // console.log(this.props);
+    const results = props.data;
+// console.log(results);
+  let gifs;
   
   if(results.length > 0) {
-    photos = results.map(photo => {
+    gifs = results.map(gif => {
       return(
-        <Photo key={photo.id} url={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
+        <Photo key={gif.id} url={`https://live.staticflickr.com/${gif.server}/${gif.id}_${gif.secret}_z.jpg`} />
       );
      
     });
 
   } else {
-    return(
-     photos = <NotFound/>
- )
-  } return (
+     gifs = <NotFound/>
+ 
+  } 
+  return (
     <div className="results-container">
       
     <h2>Results</h2>
     <ul>
-      { photos }
+      { gifs }
     </ul>
   </div>
   )
