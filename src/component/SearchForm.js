@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import {
 //     Form,
-//     // FormGroup,
-//     // FormControl,
+//     FormGroup,
+//     FormControl,
 //     Button
 // } from 'react-bootstrap';
 
@@ -18,10 +18,12 @@ class SearchForm extends Component {
     }
     
     handleSubmit = e => {
+      let searchPath = `/${this.state.searchText}`;
       e.preventDefault();
-      this.props.onSearch(this.query.value);
+      this.props.onSearch(this.state.searchText);
+      this.props.history.push(searchPath);
       e.currentTarget.reset();
-    }
+    };
     
     render() {  
       return (

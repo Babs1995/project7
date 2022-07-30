@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from  "react-router-dom";
 
-const Nav = () => {
+class Nav extends Component {
+  render(){
   return (
-    <div className="nav">
-        <ul>
+    <nav className="main-nav">        
+    <ul>
             <li><NavLink to="/cats">Cats</NavLink></li>
             <li><NavLink to="/autumn">Autumn</NavLink></li>
             <li><NavLink to="/coffee">Coffee</NavLink></li>
         </ul>
-    </div>
-  );
+    </nav>
+    );
+  }
 }
 
 export default Nav;

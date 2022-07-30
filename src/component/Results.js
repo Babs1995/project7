@@ -5,7 +5,7 @@ import NotFound from './NotFound';
 // import SearchForm from './SearchForm';
 
 //photo containter that maps over array if a photo is found return the key and results otherwise return not found component
-const PhotoList = props => { 
+const Results = props => { 
   const results = props.data;
   let photos;
   
@@ -32,4 +32,4 @@ const PhotoList = props => {
   )
 }
 
-export default PhotoList;
+export default Results;

@@ -1,4 +1,5 @@
 import  React, { Component } from 'react';
+import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from 'axios'; 
 import apiKey from './config';
@@ -17,8 +18,7 @@ class App extends Component {
       photos: [],
       cats: [],
       autumn: [],
-      coffee: [],
-      loading: true
+      coffee: []
     };
   } 
   componentDidMount(){
@@ -28,10 +28,10 @@ class App extends Component {
     this.performSearch('coffee'); 
   }
 
-  performSearch = (query ='cats')=>{
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&user_id=&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => { 
-console.log(response)
+  performSearch = (query ='cats') =>{
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    .then(response => {
+
       if (query === 'cats') {
         this.setState({cats: response.data.photos.photo});
       } else if (query === 'autumn') {
@@ -56,16 +56,17 @@ console.log(response)
       <SearchForm onSearch={this.performSearch} />
       <Nav />
       <div className="photo-container">
-      (this.state.loading)
-      ?<p>Loading...</p>
-      :<Switch>   
+     
+      {/* ?<p>Loading...</p> */}
+      {/* : */}
+      <Switch>   
 
-        <Route exact path="/" component={() => <Results to="/cats" /> } />
-        <Route path="/cats" component={() => <Results query="cats" title="cats" data={this.state.cats} />} />
-        <Route path="/autumn" component={() => <Results query="autumn" title="autumn" data={this.state.autumn} />} />
-        <Route path="/coffee" component={() => <Results query="coffee" title="coffee" data={this.state.coffee} />} />
-        <Route path="/search/:query/" component={() => <Results query={this.state.query} data={this.state.photos} title= {this.state.query}/>} />
-        <Route component={NotFound} />
+      <Route  exact path='/' render={(props) => <Results data={this.state.photos}/>} />
+        <Route path="/cats" render={() => <Results query="cats" title="cats" data={this.state.cats} />} />
+        <Route path="/autumn" render={() => <Results query="autumn" title="autumn" data={this.state.autumn} />} />
+        <Route path="/coffee" render={() => <Results query="coffee" title="coffee" data={this.state.coffee} />} />
+        <Route path="/:query/" render={() => <Results query={this.state.query} data={this.state.photos} />} />
+        <Route render={NotFound} />
 
       </Switch>
       </div>
