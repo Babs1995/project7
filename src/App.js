@@ -8,6 +8,7 @@ import NotFound from './component/NotFound';
 import Nav from './component/Nav';
 
 
+
 class App extends Component {
   
   constructor() {
@@ -29,28 +30,27 @@ class App extends Component {
 
   performSearch = (query ='cats')=>{
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&user_id=&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => response.json())
-    .then((data) => {
+    .then(response => { 
+console.log(response)
       if (query === 'cats') {
-        this.setState({cats: data.photos.photo, loading: false});
+        this.setState({cats: response.data.photos.photo});
       } else if (query === 'autumn') {
-        this.setState({autumn: data.photos.photo, loading: false});
+        this.setState({autumn: response.data.photos.photo});
       } else if (query === 'coffee') {
-        this.setState({coffee: data.photos.photo, loading: false});
+        this.setState({coffee: response.data.photos.photo});
       } else {
-        this.setState({
-          photos: data.photos.photo,
-          loading: false,
-          query: query
-        });
-      }
-      })
+        this.setState({photos:response.data.photos.photo});
+        }
+   })
+    
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
       });
     };
 
-render(){
+ // routes attached to paths to render image selected 
+ render(){ 
+  console.log(this.state.photos);
   return (
     <BrowserRouter>
       <SearchForm onSearch={this.performSearch} />

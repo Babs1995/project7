@@ -1,18 +1,35 @@
-import React from 'react'; 
-import {
-    Container,
-    ListGroup,
-    ListGroupItem
-  } from 'react-bootstrap';
-const Results = () => (
-   <Container>
-        <h2>Results List</h2>
-        <ListGroup>
-            <ListGroupItem href="#" active>Link 1</ListGroupItem>
-            <ListGroupItem href="#">Link 2</ListGroupItem>
-            <ListGroupItem href="#" disabled>Link 3</ListGroupItem>
-        </ListGroup>
-   </Container> 
-)
+import React from 'react'
+import Photo from './Photo';
+import NotFound from './NotFound';
+// import Nav from './Nav';
+// import SearchForm from './SearchForm';
 
-export default Results; 
+//photo containter that maps over array if a photo is found return the key and results otherwise return not found component
+const PhotoList = props => { 
+  const results = props.data;
+  let photos;
+  
+  if(results.length > 0) {
+    photos = results.map(photo => {
+      return(
+        <Photo key={photo.id} url={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
+      );
+     
+    });
+
+  } else {
+    return(
+     photos = <NotFound/>
+ )
+  } return (
+    <div className="results-container">
+      
+    <h2>Results</h2>
+    <ul>
+      { photos }
+    </ul>
+  </div>
+  )
+}
+
+export default PhotoList;
