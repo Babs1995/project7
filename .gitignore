@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# ignored files 
+src/config.js
+
 # testing
 /coverage
 
