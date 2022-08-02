@@ -14,7 +14,9 @@ const Results = (props) => {
   if(results.length > 0) {
     gifs = results.map(gif => {
       return(
-        <Photo key={gif.id} url={`https://live.staticflickr.com/${gif.server}/${gif.id}_${gif.secret}_z.jpg`} />
+        <Photo 
+        key={gif.id} 
+        url={`https://live.staticflickr.com/${gif.server}/${gif.id}_${gif.secret}_z.jpg`} />
       );
      
     });
